@@ -1,0 +1,52 @@
+[25-Sep-2018 16:06:17 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/dmcpi1/is.dmcpi.com/pages/fpdf/reports/r_policy.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/dmcpi1/is.dmcpi.com/pages/fpdf/reports/r_policy.php on line 4
+[25-Sep-2018 16:14:37 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/dmcpi1/is.dmcpi.com/pages/fpdf/reports/r_policy.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/dmcpi1/is.dmcpi.com/pages/fpdf/reports/r_policy.php on line 4
+[25-Sep-2018 16:14:45 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/dmcpi1/is.dmcpi.com/pages/fpdf/reports/r_policy.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/dmcpi1/is.dmcpi.com/pages/fpdf/reports/r_policy.php on line 4
+[25-Sep-2018 17:17:03 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/dmcpi1/is.dmcpi.com/pages/fpdf/reports/r_policy.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/dmcpi1/is.dmcpi.com/pages/fpdf/reports/r_policy.php on line 8
+[25-Sep-2018 17:17:10 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/dmcpi1/is.dmcpi.com/pages/fpdf/reports/r_policy.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/dmcpi1/is.dmcpi.com/pages/fpdf/reports/r_policy.php on line 8
+[25-Sep-2018 17:17:14 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/dmcpi1/is.dmcpi.com/pages/fpdf/reports/r_policy.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/dmcpi1/is.dmcpi.com/pages/fpdf/reports/r_policy.php on line 8
+[25-Sep-2018 17:17:54 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/dmcpi1/is.dmcpi.com/pages/fpdf/reports/r_policy.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/dmcpi1/is.dmcpi.com/pages/fpdf/reports/r_policy.php on line 8
+[26-Sep-2018 00:14:37 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/dmcpi1/is.dmcpi.com/pages/fpdf/reports/r_policy.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/dmcpi1/is.dmcpi.com/pages/fpdf/reports/r_policy.php on line 8
+[26-Sep-2018 03:35:33 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/dmcpi1/is.dmcpi.com/pages/fpdf/reports/r_policy.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/dmcpi1/is.dmcpi.com/pages/fpdf/reports/r_policy.php on line 8
+[26-Sep-2018 03:40:29 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/dmcpi1/is.dmcpi.com/pages/fpdf/reports/r_policy.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/dmcpi1/is.dmcpi.com/pages/fpdf/reports/r_policy.php on line 8
+[26-Sep-2018 03:44:52 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/dmcpi1/is.dmcpi.com/pages/fpdf/reports/r_policy.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/dmcpi1/is.dmcpi.com/pages/fpdf/reports/r_policy.php on line 8
+[26-Sep-2018 15:23:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/dmcpi1/is.dmcpi.com/pages/fpdf/reports/r_policy.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/dmcpi1/is.dmcpi.com/pages/fpdf/reports/r_policy.php on line 8
+[26-Sep-2018 15:27:52 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/dmcpi1/is.dmcpi.com/pages/fpdf/reports/r_policy.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/dmcpi1/is.dmcpi.com/pages/fpdf/reports/r_policy.php on line 7

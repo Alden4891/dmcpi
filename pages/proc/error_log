@@ -1,0 +1,49 @@
+[25-Sep-2018 15:41:34 UTC] PHP Warning:  mysqli_connect(): (42000/1044): Access denied for user 'dmcpi1_root'@'50.31.134.63' to database 'dmcpi1_dmcsm' in /home/dmcpi1/public_html/pages/dbconnect.php on line 29
+[25-Sep-2018 15:41:34 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home/dmcpi1/public_html/pages/proc/login_proc.php on line 27
+[25-Sep-2018 15:41:34 UTC] PHP Warning:  mysqli_error() expects exactly 1 parameter, 0 given in /home/dmcpi1/public_html/pages/proc/login_proc.php on line 29
+[25-Sep-2018 15:41:38 UTC] PHP Warning:  mysqli_connect(): (42000/1044): Access denied for user 'dmcpi1_root'@'50.31.134.63' to database 'dmcpi1_dmcsm' in /home/dmcpi1/public_html/pages/dbconnect.php on line 29
+[25-Sep-2018 15:41:38 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home/dmcpi1/public_html/pages/proc/login_proc.php on line 27
+[25-Sep-2018 15:41:38 UTC] PHP Warning:  mysqli_error() expects exactly 1 parameter, 0 given in /home/dmcpi1/public_html/pages/proc/login_proc.php on line 29
+[26-Sep-2018 03:32:25 UTC] PHP Warning:  getimagesize(): Filename cannot be empty in /home/dmcpi1/is.dmcpi.com/pages/proc/upload_profile_photo_proc.php on line 7
+[26-Sep-2018 03:32:25 UTC] PHP Warning:  file_get_contents(): Filename cannot be empty in /home/dmcpi1/is.dmcpi.com/pages/proc/upload_profile_photo_proc.php on line 10
+[28-Sep-2018 00:44:05 UTC] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'dmcpi1_root'@'localhost' (using password: YES) in /home/dmcpi1/is.dmcpi.com/pages/dbconnect.php on line 31
+[28-Sep-2018 00:44:05 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home/dmcpi1/is.dmcpi.com/pages/proc/login_proc.php on line 29
+[28-Sep-2018 00:44:05 UTC] PHP Warning:  mysqli_error() expects exactly 1 parameter, 0 given in /home/dmcpi1/is.dmcpi.com/pages/proc/login_proc.php on line 29
+[28-Sep-2018 00:44:08 UTC] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'dmcpi1_root'@'localhost' (using password: YES) in /home/dmcpi1/is.dmcpi.com/pages/dbconnect.php on line 31
+[28-Sep-2018 00:44:08 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home/dmcpi1/is.dmcpi.com/pages/proc/login_proc.php on line 29
+[28-Sep-2018 00:44:08 UTC] PHP Warning:  mysqli_error() expects exactly 1 parameter, 0 given in /home/dmcpi1/is.dmcpi.com/pages/proc/login_proc.php on line 29
+[28-Sep-2018 00:44:13 UTC] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'dmcpi1_root'@'localhost' (using password: YES) in /home/dmcpi1/is.dmcpi.com/pages/dbconnect.php on line 31
+[28-Sep-2018 00:44:13 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home/dmcpi1/is.dmcpi.com/pages/proc/login_proc.php on line 29
+[28-Sep-2018 00:44:13 UTC] PHP Warning:  mysqli_error() expects exactly 1 parameter, 0 given in /home/dmcpi1/is.dmcpi.com/pages/proc/login_proc.php on line 29
+[28-Sep-2018 00:44:27 UTC] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'dmcpi1_root'@'localhost' (using password: YES) in /home/dmcpi1/is.dmcpi.com/pages/dbconnect.php on line 31
+[28-Sep-2018 00:44:27 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home/dmcpi1/is.dmcpi.com/pages/proc/login_proc.php on line 29
+[28-Sep-2018 00:44:27 UTC] PHP Warning:  mysqli_error() expects exactly 1 parameter, 0 given in /home/dmcpi1/is.dmcpi.com/pages/proc/login_proc.php on line 29
+[28-Sep-2018 00:44:30 UTC] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'dmcpi1_root'@'localhost' (using password: YES) in /home/dmcpi1/is.dmcpi.com/pages/dbconnect.php on line 31
+[28-Sep-2018 00:44:30 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home/dmcpi1/is.dmcpi.com/pages/proc/login_proc.php on line 29
+[28-Sep-2018 00:44:30 UTC] PHP Warning:  mysqli_error() expects exactly 1 parameter, 0 given in /home/dmcpi1/is.dmcpi.com/pages/proc/login_proc.php on line 29
+[28-Sep-2018 00:44:31 UTC] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'dmcpi1_root'@'localhost' (using password: YES) in /home/dmcpi1/is.dmcpi.com/pages/dbconnect.php on line 31
+[28-Sep-2018 00:44:31 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home/dmcpi1/is.dmcpi.com/pages/proc/login_proc.php on line 29
+[28-Sep-2018 00:44:31 UTC] PHP Warning:  mysqli_error() expects exactly 1 parameter, 0 given in /home/dmcpi1/is.dmcpi.com/pages/proc/login_proc.php on line 29
+[28-Sep-2018 00:44:48 UTC] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'dmcpi1_root'@'localhost' (using password: YES) in /home/dmcpi1/is.dmcpi.com/pages/dbconnect.php on line 31
+[28-Sep-2018 00:44:48 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home/dmcpi1/is.dmcpi.com/pages/proc/login_proc.php on line 29
+[28-Sep-2018 00:44:48 UTC] PHP Warning:  mysqli_error() expects exactly 1 parameter, 0 given in /home/dmcpi1/is.dmcpi.com/pages/proc/login_proc.php on line 29
+[28-Sep-2018 05:47:03 UTC] PHP Warning:  mysqli_fetch_row() expects parameter 1 to be mysqli_result, boolean given in /home/dmcpi1/is.dmcpi.com/pages/proc/userlist_proc.php on line 127
+[28-Sep-2018 05:47:03 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home/dmcpi1/is.dmcpi.com/pages/proc/userlist_proc.php on line 145
+[29-Sep-2018 06:39:02 UTC] PHP Warning:  mysqli_error() expects exactly 1 parameter, 0 given in /home/dmcpi1/is.dmcpi.com/pages/proc/cliregistrationform_proc.php on line 387
+[03-Oct-2018 00:45:35 UTC] PHP Warning:  mysqli_error() expects exactly 1 parameter, 0 given in /home/dmcpi1/is.dmcpi.com/pages/proc/cliregistrationform_proc.php on line 387
+[03-Oct-2018 00:51:54 UTC] PHP Warning:  mysqli_error() expects exactly 1 parameter, 0 given in /home/dmcpi1/is.dmcpi.com/pages/proc/cliregistrationform_proc.php on line 387
+[03-Oct-2018 00:56:15 UTC] PHP Warning:  mysqli_error() expects exactly 1 parameter, 0 given in /home/dmcpi1/is.dmcpi.com/pages/proc/cliregistrationform_proc.php on line 387
+[03-Oct-2018 05:08:20 UTC] PHP Warning:  mysqli_error() expects exactly 1 parameter, 0 given in /home/dmcpi1/is.dmcpi.com/pages/proc/cliregistrationform_proc.php on line 444
+[03-Oct-2018 05:13:31 UTC] PHP Warning:  mysqli_error() expects exactly 1 parameter, 0 given in /home/dmcpi1/is.dmcpi.com/pages/proc/cliregistrationform_proc.php on line 444
+[03-Oct-2018 06:06:03 UTC] PHP Warning:  mysqli_error() expects exactly 1 parameter, 0 given in /home/dmcpi1/is.dmcpi.com/pages/proc/cliregistrationform_proc.php on line 444
+[03-Oct-2018 10:40:53 UTC] PHP Warning:  mysqli_error() expects exactly 1 parameter, 0 given in /home/dmcpi1/is.dmcpi.com/pages/proc/cliregistrationform_proc.php on line 444
+[03-Oct-2018 11:27:28 UTC] PHP Warning:  mysqli_error() expects exactly 1 parameter, 0 given in /home/dmcpi1/is.dmcpi.com/pages/proc/cliregistrationform_proc.php on line 444
+[03-Oct-2018 16:02:40 UTC] PHP Notice:  Array to string conversion in /home/dmcpi1/is.dmcpi.com/pages/proc/getvalue.php on line 6
+[03-Oct-2018 16:27:43 UTC] PHP Warning:  mysqli_error() expects exactly 1 parameter, 0 given in /home/dmcpi1/is.dmcpi.com/pages/proc/cliregistrationform_proc.php on line 444
+[03-Oct-2018 16:53:04 UTC] PHP Warning:  mysqli_error() expects exactly 1 parameter, 0 given in /home/dmcpi1/is.dmcpi.com/pages/proc/cliregistrationform_proc.php on line 444
+[03-Oct-2018 17:08:19 UTC] PHP Warning:  mysqli_error() expects exactly 1 parameter, 0 given in /home/dmcpi1/is.dmcpi.com/pages/proc/cliregistrationform_proc.php on line 444
+[03-Oct-2018 17:12:33 UTC] PHP Warning:  mysqli_error() expects exactly 1 parameter, 0 given in /home/dmcpi1/is.dmcpi.com/pages/proc/cliregistrationform_proc.php on line 444
+[03-Oct-2018 17:16:08 UTC] PHP Warning:  mysqli_error() expects exactly 1 parameter, 0 given in /home/dmcpi1/is.dmcpi.com/pages/proc/cliregistrationform_proc.php on line 445
+[04-Oct-2018 01:37:34 UTC] PHP Warning:  mysqli_error() expects exactly 1 parameter, 0 given in /home/dmcpi1/is.dmcpi.com/pages/proc/cliregistrationform_proc.php on line 141
+[10-Oct-2018 20:34:59 UTC] PHP Notice:  Undefined offset: 1 in /home/dmcpi1/is.dmcpi.com/pages/proc/userregistration_proc.php on line 33
+[10-Oct-2018 21:14:13 UTC] PHP Notice:  Undefined offset: 1 in /home/dmcpi1/is.dmcpi.com/pages/proc/userregistration_proc.php on line 33
