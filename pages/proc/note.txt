@@ -1,0 +1,14 @@
+TODO:
+    
+    
+    fix: change all date format to mm/dd/yyyyy -> done
+    fix: registration form: make purok is optional -> done
+
+
+
+
+
+list all files in dir
+
+$dir = "/images/";
+$a = scandir($dir);
