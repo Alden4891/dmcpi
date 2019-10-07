@@ -382,29 +382,7 @@
                 }                
 
 
-/*
-
-                if ($page=='clientslist' || $page=='none') {
-                     
-                   // include("header.php");
-
-                    if ($cmd=='cliregistration'){
-                        include("cliregistration.php"); 
-                    }elseif($cmd=='installment'){
-                        include("installment.php"); 
-                    }else{
-                         
-                    }
-
-
-
-                include("footer.php"); 
-
-                } else {
-
-                } 
-                    
-  */              
+             
        
 
             ?>

@@ -609,6 +609,8 @@ if ($Member_Code!='none'){
                                             </div>
 
                                         <?php
+
+					//var here
                                         $seldSingle3 = "";
                                         $seldMarried3 = "";
                                         $seldWidow3 = "";
