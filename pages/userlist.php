@@ -187,6 +187,24 @@
     });
     
 
+    $(document).on("mousedown","#showpassword", function(e){
+        e.preventDefault();
+        var atype = $('#password1').attr('type');
+        if (atype=='password') {
+            $('#password1').attr('type','text');
+
+        }
+    });
+
+    $(document).on("mouseup","#showpassword", function(e){
+        e.preventDefault();
+        var atype = $('#password1').attr('type');
+        if (atype=='text') {
+            $('#password1').attr('type','password');
+
+        }
+    });
+
     
     //SAVE PLAN
     $(document).on("click","#btnusersave",function (e) {
@@ -379,11 +397,20 @@
               </div>
             </div>
 
+
             <!-- Text input-->
             <div class="form-group">
               <label class="col-md-4 control-label" for="password1">Password</label>  
               <div class="col-md-8">
-              <input id="password1" name="password1" type="password" placeholder="" class="form-control input-md" required="">
+                <div class="input-group">
+                   <input id="password1" name="password1" type="password" placeholder="" class="form-control input-md" required="">
+
+                   <span class="input-group-btn">
+                        
+                        <button class="btn btn-default" type="button" id=showpassword>SHOW</button>
+                   </span>
+                </div>
+
               <span class="help-block"></span>  
               </div>
             </div>
