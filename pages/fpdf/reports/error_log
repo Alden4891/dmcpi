@@ -50,3 +50,11 @@ Stack trace:
 Stack trace:
 #0 {main}
   thrown in /home/dmcpi1/is.dmcpi.com/pages/fpdf/reports/r_policy.php on line 7
+[24-Oct-2019 05:43:53 UTC] PHP Warning:  getimagesize(forms/0.jpg): failed to open stream: No such file or directory in /home/dmcpi1/is.dmcpi.com/pages/fpdf/fpdf/fpdf.php on line 2479
+[24-Oct-2019 05:43:53 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'FPDF error: Missing or incorrect image file: forms/0.jpg' in /home/dmcpi1/is.dmcpi.com/pages/fpdf/fpdf/fpdf.php:541
+Stack trace:
+#0 /home/dmcpi1/is.dmcpi.com/pages/fpdf/fpdf/fpdf.php(2483): FPDF->Error('Missing or inco...')
+#1 /home/dmcpi1/is.dmcpi.com/pages/fpdf/fpdf/fpdf.php(1769): FPDF->_parsejpg('forms/0.jpg')
+#2 /home/dmcpi1/is.dmcpi.com/pages/fpdf/reports/r_policy.php(227): FPDF->Image('forms/0.jpg', 0, 0, 216, 0, '', '')
+#3 {main}
+  thrown in /home/dmcpi1/is.dmcpi.com/pages/fpdf/fpdf/fpdf.php on line 541

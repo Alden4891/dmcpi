@@ -1,3 +1,10 @@
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,10 +12,17 @@
 
 <script type="text/javascript">
     window.location = "pages/login.php";
+
 </script>
+
 </head>
+
+
 <body>
+
+
 </body>
+
 </html>
 
 

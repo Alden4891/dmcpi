@@ -223,7 +223,7 @@
                 $.post("proc/dashboard_getchart_collection_perf.php",{year:2019},
                 function (data)
                 {
-                   
+                   console.log(data);
                     var periods = [];
                     var amounts = [];
 

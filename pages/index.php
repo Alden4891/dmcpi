@@ -329,7 +329,7 @@
           if ($dev_mode==1){
             echo "
 
-            <div class=\"container body main_container\">
+            <div class=\"container body\">
             <div class=\"jumbotron\">
               <h1>DMCPI - Advisory</h1>
               <p>dmcpi.com is temporarily unavailable due to maintenance. Please try again later.</p>

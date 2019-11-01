@@ -2,12 +2,11 @@
     $selectedYear = (isset($_REQUEST['selectedYear'])?$_REQUEST['selectedYear']:'');
     $selectedMonth = (isset($_REQUEST['selectedMonth'])?$_REQUEST['selectedMonth']:'');
     $encoder_id = (isset($_REQUEST['encoder_id'])?$_REQUEST['encoder_id']:'');
-	$selectedEncSessionID = (isset($_REQUEST['selectedEncSessionID'])?$_REQUEST['selectedEncSessionID']:'');
 
     include '../dbconnect.php';
  
 
- 
+
 	$sql = "
 		SELECT
 		    `users`.`user_id`
@@ -25,14 +24,14 @@
 		        ON (`installment_ledger`.`Member_Code` = `members_account`.`Member_Code`)
 		    INNER JOIN `dmcpi1_dmcsm`.`branch_details` 
 		        ON (`members_account`.`BranchManager` = `branch_details`.`Branch_ID`)
-		WHERE 
-			`installment_ledger`.`encoded_by` =$encoder_id and 
-			`installment_ledger`.enc_session_id=$selectedEncSessionID
+		WHERE (YEAR(`installment_ledger`.date_encoded) =$selectedYear
+		    AND MONTH(`installment_ledger`.date_encoded) =$selectedMonth
+		    AND `installment_ledger`.`encoded_by` =$encoder_id)
 		GROUP BY `users`.`user_id`, `users`.`fullname`, `installment_ledger`.`orno`, `installment_ledger`.`ordate`, `installment_ledger`.`date_encoded`, `branch_details`.`Branch_Name`
 		ORDER BY `installment_ledger`.`encoded_by` DESC;
 	";
 
-//echo "$sql";
+echo "$sql";
 
 	$res_data=mysqli_query($con,$sql);
 	$cnt=0;

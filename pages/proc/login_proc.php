@@ -28,6 +28,8 @@
 			    AND `users`.`password` ='$password');
 
 	") or die(mysqli_error());
+	
+	echo "test";
 	if (mysqli_num_rows($res)==0){
 		echo "**failed**";
 	}else{
