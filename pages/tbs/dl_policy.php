@@ -1,15 +1,15 @@
 <?php
-ini_set('display_errors', 1);
-//include '../../dbconnect.php';
-//include '../../dbclose.php';
-$Member_Code = (isset($_REQUEST['Member_Code'])?$_REQUEST['Member_Code']:'none');
-$link = mysql_connect($con_host,$con_username,$con_password);
-mysql_select_db($con_database);
 
+$Member_Code = isset($_REQUEST['member_code'])?$_REQUEST['member_code']:'0';
 
+// prevent from a PHP configuration problem when using mktime() and date()
+if (version_compare(PHP_VERSION,'5.1.0')>=0) {
+    if (ini_get('date.timezone')=='') {
+        date_default_timezone_set('UTC');
+    }
+}
 
-$res_data = mysql_query("
-
+$sql = "
 SELECT DISTINCT
   `members_profile`.`Member_Code`        AS `Member_Code`,
   `members_profile`.`Fname`              AS `Fname`,
@@ -100,168 +100,131 @@ JOIN `aofullname`
 ON `members_account`.`Member_Code` = `aofullname`.`Member_Code`
 JOIN `planname`
 ON `members_account`.`Member_Code` = `planname`.`Member_Code`
-WHERE `members_account`.Member_Code = '$Member_Code'
+WHERE `members_account`.Member_Code = '$Member_Code';
+";
 
-",$link);
-$r=mysql_fetch_array($res_data,MYSQLI_ASSOC);
-$form_number = $r['form_number']; 
-$Plan_id = $r['Plan_id']; 
-//echo "$form_number $Plan_id";
+include '../dbconnect.php';
 
-if ($form_number == ''){
-	echo "Template not found! Please Upload your Policy Form tempalte."  ;
-	return;
+// prepare data to display
+$res_data = mysqli_query($con,$sql) or die(mysqli_error());
+
+if (mysqli_num_rows($res_data) > 0) {
+
+    $r=mysqli_fetch_array($res_data,MYSQLI_ASSOC);
+
+    // Include classes
+    include_once('tbs_class.php'); // Load the TinyButStrong template engine
+    include_once('tbs_plugin_opentbs.php'); // Load the OpenTBS plugin
+
+
+    // Initialize the TBS instance
+    $TBS = new clsTinyButStrong; // new instance of TBS
+    $TBS->Plugin(TBS_INSTALL, OPENTBS_PLUGIN); // load the OpenTBS plugin
+
+    $form_number = $r['form_number'];
+
+    //member data
+    $fname = $r['Fname'];
+    $mname = $r['Mname'];
+    $lname = $r['Lname'];
+    $nick =  $r['Nname'];
+    $sex = $r['Sex'];
+    $cstatus = $r['Status'];
+
+
+    //todo: convert to address
+    //$purok = "";
+    //$brgy = "zone iii";
+    //$city = "koronadal city";
+    //$prov = "south cotabato";
+    $address = $r['Address'];
+    
+    $valid_id = $r['IDno'];
+
+    $dob=$r['Bdate'];
+    $age=$r['Age'];
+    $pob=$r['Bplace'];
+    $occupation=$r['Occupation'];
+    $religion=$r["religion"];
+
+    //payor
+    $p_name = $r["pname"];
+    $p_age = $r["page"];
+    $p_relation = $r["prelation"];
+    $p_cont = $r["pcontactno"];
+
+    //todo: same with mem address
+    //$p_prk = "bumanaag";
+    //$p_brgy = "zone iii";
+    //$p_city = "koronadal city";
+    //$p_prov = "south cotabato";
+    $p_address = $r['Address'];
+
+    //member
+    $m_cont = $r["mcontactno"];
+
+    //beneficiary
+    $b_cont = $r["bcontactno"];
+    $b_name = $r["bname"];
+    $b_dob = $r["bbdate"];
+    $b_age = $r["bage"];
+    $b_relation = $r["brelation"];
+    $b_cstatus = $r["bstatus"];
+
+    //agent
+    $a_name=$r["AgentName"];
+    $a_id="";
+    $a_code="";
+    $a_branch=$r["Branch_name"];
+    $a_branchcode="";
+
+    //payment
+    $prdate=$r["PRdate"];
+    $prno=$r["PRno"];
+    $ordate=$r["ORdate"];
+    $orno=$r["ORno"];
+    $amount=$r["amount"];
+    $cdate=$r["ORdate"];
+    $caddress=$r["CollectionAddress"];
+
+    // -----------------
+    // Load the template
+    // -----------------
+
+    $template = "./templates/$form_number.docx";
+    $TBS->LoadTemplate($template, OPENTBS_ALREADY_UTF8); // Also merge some [onload] automatic fields (depends of the type of document).
+
+    // Delete comments
+    $TBS->PlugIn(OPENTBS_DELETE_COMMENTS);
+
+    // -----------------
+    // Output the result
+    // -----------------
+
+    // Define the name of the output file
+    $save_as = (isset($_POST['save_as']) && (trim($_POST['save_as'])!=='') && ($_SERVER['SERVER_NAME']=='localhost')) ? trim($_POST['save_as']) : '';
+    //$output_file_name = str_replace('.', '_'.date('Y-m-d').$save_as.'.', $template);
+    
+    $output_file_name = "Policy_".$Member_Code."_".date('Y-m-d').".docx";
+
+    if ($save_as==='') {
+        // Output the result as a downloadable file (only streaming, no data saved in the server)
+        $TBS->Show(OPENTBS_DOWNLOAD, $output_file_name); // Also merges all [onshow] automatic fields.
+        // Be sure that no more output is done, otherwise the download file is corrupted with extra data.
+        exit();
+    } else {
+        // Output the result as a file on the server.
+        $TBS->Show(OPENTBS_FILE, $output_file_name); // Also merges all [onshow] automatic fields.
+        // The script can continue.
+        exit("File [$output_file_name] has been created.");
+    }
+
+
+}else{
+    echo "**not_found**";
 }
 
-$res_variables = mysql_query("SELECT * FROM form_details WHERE Plan_id = '$Plan_id'",$link);
-
-require('../fpdf/fpdf.php');
-
-class PDF extends FPDF
-{
-protected $B = 0;
-protected $I = 0;
-protected $U = 0;
-protected $HREF = '';
-
-	function WriteHTML($html)
-	{
-		// HTML parser
-		$html = str_replace("\n",' ',$html);
-		$a = preg_split('/<(.*)>/U',$html,-1,PREG_SPLIT_DELIM_CAPTURE);
-		foreach($a as $i=>$e)
-		{
-			if($i%2==0)
-			{
-				// Text
-				if($this->HREF)
-					$this->PutLink($this->HREF,$e);
-				else
-					$this->Write(5,$e);
-			}
-			else
-			{
-				// Tag
-				if($e[0]=='/')
-					$this->CloseTag(strtoupper(substr($e,1)));
-				else
-				{
-					// Extract attributes
-					$a2 = explode(' ',$e);
-					$tag = strtoupper(array_shift($a2));
-					$attr = array();
-					foreach($a2 as $v)
-					{
-						if(preg_match('/([^=]*)=["\']?([^"\']*)/',$v,$a3))
-							$attr[strtoupper($a3[1])] = $a3[2];
-					}
-					$this->OpenTag($tag,$attr);
-				}
-			}
-		}
-	}
-
-	function OpenTag($tag, $attr)
-	{
-		// Opening tag
-		if($tag=='B' || $tag=='I' || $tag=='U')
-			$this->SetStyle($tag,true);
-		if($tag=='A')
-			$this->HREF = $attr['HREF'];
-		if($tag=='BR')
-			$this->Ln(5);
-	}
-
-	function CloseTag($tag)
-	{
-		// Closing tag
-		if($tag=='B' || $tag=='I' || $tag=='U')
-			$this->SetStyle($tag,false);
-		if($tag=='A')
-			$this->HREF = '';
-	}
-
-	function SetStyle($tag, $enable)
-	{
-		// Modify style and select corresponding font
-		$this->$tag += ($enable ? 1 : -1);
-		$style = '';
-		foreach(array('B', 'I', 'U') as $s)
-		{
-			if($this->$s>0)
-				$style .= $s;
-		}
-		$this->SetFont('',$style);
-	}
-
-	function PutLink($URL, $txt)
-	{
-		// Put a hyperlink
-		$this->SetTextColor(0,0,255);
-		$this->SetStyle('U',true);
-		$this->Write(5,$txt,$URL);
-		$this->SetStyle('U',false);
-		$this->SetTextColor(0);
-	}
-
-	function writeText($x,$y, $text, $font='Arial',$style='', $size=11){
-		$this->SetFont($font,$style,$size);
-		$this->Cell($x);
-		$this->Cell($x,$y,$text);
-	}
-	function validateDate($date, $format = 'Y-m-d')
-	{
-	    $d = DateTime::createFromFormat($format, $date);
-	    // The Y ( 4 digits year ) returns TRUE for any integer with any number of digits so changing the comparison from == to === fixes the issue.
-	    return $d && $d->format($format) === $date;
-	}
-
-}
-
-
-$pdf = new PDF();
-
-
-$pdf->AddPage('P',Array(215.9, 330.2)); //8.5x13
-$pdf->Image("forms/$form_number.jpg",0,0,216,0,'','');
-$pdf->SetLeftMargin(11);
 
 
 
-while ($rr=mysql_fetch_array($res_variables,MYSQL_NUM)) {
-
-        $id 		= $rr[0];
-        $field 		= $rr[2];
-        $font 		= $rr[3];
-        $font_size 	= $rr[4];
-        $font_style = $rr[5];
-        $x 			= $rr[6];
-        $y 			= $rr[7];
-
-        //echo $r[$field]."<br>";
-
-        $label = $r[$field];
-
-        //check label is a date 
-		if ($pdf->validateDate($label)){
-			$label=date( "m/d/Y", strtotime($label));
-		}else if ($field == 'Sex'){
-			$label = substr($label, 0,1);
-		}
-		$label = strtoupper($label);
-
-$pdf->SetFont($font,$font_style,$font_size);
-$pdf->SetFontSize($font_size);
-$pdf->setXY($x,$y);$pdf->write(5,$label);
-
-}
-
-$pdf->Output('I','policy.explode(delimiter, string)');
-	
-
-mysql_free_result($res_data);
-mysql_close($link);
-
-
-
-?>
+include '../dbclose.php';

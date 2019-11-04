@@ -1,14 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
-
 <?php
-
-    
-
-
-
     $today = getdate(); 
     $current_month = $today['mon']; 
     $current_day = $today['mday']; 
@@ -425,7 +418,8 @@
                                 <li class="<?=$FM_AGENT_MANAGEMENT_DISABLER?>"><a href="?page=deagent"> AGENT PROFILE</a></li>
                                 <li class="<?=$FM_BRANCH_MANAGEMENT_DISABLER?>"><a href="?page=debranch"> BRANCH MANAGERS</a></li>
                                 <li class="<?=$FM_PLANS_DISABLER?>"><a href="?page=dePlans"> PLANS</a></li>
-                                <li class="<?=$FM_POLICY_FORMS_DISABLER?>"><a href="?page=dePolicyForms"> POLICY FORMS</a></li>
+                                <!--li class="<?=$FM_POLICY_FORMS_DISABLER?>"><a href="?page=dePolicyForms"> POLICY FORMS</a></li-->
+                                <li class="<?=$FM_POLICY_FORMS_DISABLER?>"><a href="?page=dePolicyForms2"> POLICY FORMS </a></li>
                                 <li class="<?=$FM_SESSIONS_DISABLER?>"><a href="?page=deEncodingSessions"> ENCODING SESSIONS</a></li>
                     </ul>
                   </li>
@@ -569,70 +563,6 @@
                   </ul>
                 </li>
 
-                <!--li role="presentation" class="dropdown">
-                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-envelope-o"></i>
-                    <span class="badge bg-green">6</span>
-                  </a>
-                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="text-center">
-                        <a>
-                          <strong>See All Alerts</strong>
-                          <i class="fa fa-angle-right"></i>
-                        </a>
-                      </div>
-                    </li>
-                  </ul>
-                </li-->
               </ul>
             </nav>
           </div>
@@ -705,6 +635,9 @@
 
                 }elseif ($page=='dePolicyForms' && isAuthorized('FM_POLICY_FORMS')) {
                     include("depolicyforms.php"); 
+
+                }elseif ($page=='dePolicyForms2' && isAuthorized('FM_POLICY_FORMS')) {
+                    include("depolicyforms2.php"); 
 
                 }elseif ($page=='deEncodingSessions' && isAuthorized('FM_POLICY_FORMS')) {
                     include("deEncodingSessions.php"); 

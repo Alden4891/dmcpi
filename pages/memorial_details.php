@@ -49,6 +49,7 @@ SELECT DISTINCT
   `members_profile`.`Bstatus`            AS `Bene Civil Status `,
   `members_profile`.`Bcontactno`         AS `Bene Contact Number`,
   `packages`.`Plan_Code`                 AS `plan_code`,
+  `packages`.`form_number`               AS `form_number`,
   `members_account`.`No_of_units`        AS `Units`,
   CONCAT(`agent_profile`.`First_name`,' ',LEFT(`agent_profile`.`Middle_Name`,1),'. ',`agent_profile`.`Last_name`) AS `Name of Agent`,
   `members_account`.`Insurance_Type`     AS `Insurance`,
@@ -86,9 +87,7 @@ $r_md=mysqli_fetch_array($res_member_data,MYSQLI_ASSOC) or die(mysqli_error());
 $di_fullname = $r_md['Fullname'];
 $di_address = $r_md['Permanent Address'];
 $di_account_status = $r_md['Account Status'];
-
-
-
+$form_number = $r_md['form_number'];
 
 $r_di=mysqli_fetch_array($res_deceased_info,MYSQLI_ASSOC) or die(mysqli_error());
 $deceased_id = $r_di["ID"];
@@ -106,20 +105,18 @@ $di_burrial_date = $r_di['burrial_date'];
 $di_surcharge = $r_di['surcharge'];
 $di_memo_serv_duration = $r_di['memo_serv_duration'];
 
-
 $option_class_alttext = "";
 
 if ($r_di['approved_by_id'] > 0){
   $option_class = "hidden";
-
   $option_class_alttext = "<i class=\"fa fa-thumbs-o-up \" ></i>
                           Apprved by $di_approved_by last $di_date_approved";
 }
 
-
-
-
-//mysqli_free_result($res_member_data);
+if (!$r_md['form_number'] > 0) {
+    $btn_download_policy_disabler = "disabled";
+    echo "$btn_download_policy_disabler";
+}
 
 ?>
 
@@ -137,16 +134,8 @@ if ($r_di['approved_by_id'] > 0){
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Members Information <small>Decease report</small></h2>
-<!--                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                    </ul>
- -->
-
+                    <h2>Members Information <small></small></h2>
                     <div class="pull-right">
-
-
 
 <?php
                     echo "
@@ -161,8 +150,6 @@ if ($r_di['approved_by_id'] > 0){
                         data-toggle=\"modal\" 
                         data-target=\".modal_update_deceased\"
                         >UPDATE INFORMATION</a>
-
-
 
 
                         <button type=\"button\" 
@@ -205,15 +192,9 @@ if ($r_di['approved_by_id'] > 0){
                             ?>                         
 
                         </li>
-
                       </ul>
-
-
                     </div>
-
                     <div class="col-md-12 col-sm-12 col-xs-12">
-
-
                       <div class="" role="tabpanel" data-example-id="togglable-tabs">
                         <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
                           <li role="presentation" class="active"><a href="#tab_content0" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">MEMBER PROFILE</a>
@@ -225,8 +206,6 @@ if ($r_di['approved_by_id'] > 0){
                           <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">POLICY</a>
                           </li>
                         </ul>
-
-
 
                         <div id="myTabContent" class="tab-content">
 
@@ -265,19 +244,8 @@ if ($r_di['approved_by_id'] > 0){
                                 ?>
 
 
-
-
-
-
                               </tbody>
                             </table>
-
-
-
-<?php
-
-?>
-
                           </div>
 
                         <div role="tabpanel" class="tab-pane fade" id="tab_content1" aria-labelledby="profile-tab">
@@ -409,12 +377,19 @@ if ($r_di['approved_by_id'] > 0){
 
                           </div>
                           <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
-<!--                               <iframe src="" style="width:100%; height: 800px">
-                                
-                              </iframe>
- -->
 
-                            <iframe src="fpdf/reports/r_policy.php?Member_Code=<?=$member_code?>#view=FitH" id=prev_pdf name=prev_pdf width="100%" height="800"></iframe>
+                          <a href="#"  class = " btn btn-success <?=$btn_download_policy_disabler?>"
+                          id=btn_preview_policy
+                          member_code=<?=$member_code?>
+                          >REFRESH</a>
+
+                          <a href="#"  class = " btn btn-info <?=$btn_download_policy_disabler?>"
+                          id=btn_download_policy
+                          member_code=<?=$member_code?>
+                          >DOWNLOAD</a>
+
+
+                            <iframe src="https://docs.google.com/gview?url=http://is.dmcpi.com/pages/tbs/rendered/<?=$member_code?>_policy.docx&embedded=true" id=prev_pdf name=prev_pdf width="100%" height="800"></iframe>
 
 
                           </div>
@@ -589,11 +564,6 @@ if ($r_di['approved_by_id'] > 0){
                <input class="form-control" id="surcharge" name="surcharge" type="Number"  value="<?=$di_surcharge ?>" />
               </div>
              </div>
-
-
-
-
-
             </form>
 
              <div class="form-group">
@@ -605,11 +575,7 @@ if ($r_di['approved_by_id'] > 0){
              </div>
            </div>
           </div>            
-
-
-
-
-            </div>
+         </div>
    
     </div>
   </div>
@@ -618,6 +584,40 @@ if ($r_di['approved_by_id'] > 0){
 
 
 <script type="text/javascript">
+
+    $(document).on('click','#btn_download_policy',function(e){
+      e.preventDefault();
+         if (confirm("You are about to download this policy. Do you want to continue?")){
+            var member_code = $(this).attr('member_code');
+            window.location = './tbs/dl_policy.php?member_code='+member_code;     
+         }
+    });
+
+    $(document).on('click','#btn_preview_policy',function(e){
+      e.preventDefault();
+         if (confirm("You are about to reload this policy. Do you want to continue?")){
+            var member_code = $(this).attr('member_code');
+            var link = "https://docs.google.com/gview?url=http://is.dmcpi.com/pages/tbs/rendered/"+member_code+"_policy.docx&embedded=true"; 
+
+            $.ajax({  
+              type: 'GET',
+              url: './tbs/v_policy.php', 
+              data: { 
+                  member_code:member_code,
+              },
+              success: function(response) {
+
+                  if (response.indexOf("**success**") > -1){
+                      $('#prev_pdf').attr('src', link);      
+                  }else if (response.indexOf("**not_found**") > -1){
+                       alert('Unable to display policy! Policy template not found.');
+                  }
+              }
+            });  
+
+
+         }
+    });
 
     $(document).on("change","#burrial_date",function(e){
         var burrial_date = $('#burrial_date').val();

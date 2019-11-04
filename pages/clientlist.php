@@ -11,10 +11,7 @@
   $res_plan = mysqli_query($con, "SELECT Plan_ID, Plan_Code, plan_name FROM packages GROUP BY Plan_Code, plan_name;") or die(mysqli_error());
 
   $MP_MEMBER_DELETION_DISABLER = isAuthorized('MP_MEMBER_DELETION')?'':'disabled';
-
-
 ?>
-
 
 <div class="row">
     <div class="col-lg-6">
@@ -28,12 +25,10 @@
            <a href=\"index.php?page=cliregistrationform&Member_Code=&uniqid=<?=uniqid()?>\" type=\"button\" class=\"btn btn-success btn-md $MP_MEMBER_ENCODING_DISABLER\"><i class=\"fa fa-plus\" ></i> New Member</a>
        </span>  
       ";
-
     ?>
     </div>
     <!-- /.col-lg-12 -->
 </div>
-
 
            <!-- search section __________________________________________________________________________________________________________________________________ -->
             <div class="row">
@@ -198,6 +193,7 @@
                             , `agent_profile`.`initials`             AS `Agent`
                             , `branch_details`.`Branch_Name`         AS `Branch_Name`
                             , `packages`.`Plan_Code`                 AS `Plan_Code`
+                            , `packages`.`form_number`               AS `form_number`
                             , `members_account`.`Remarks`            AS `Remarks`
                             , `members_account`.`No_of_units`        AS `No_of_Units`
                             , `members_account`.`Insurance_Type`     AS `Insurance_Type`
@@ -235,7 +231,7 @@
                             `members_account`.`Account_Status`, 
                             `members_account`.`Current_term`, 
                             `members_profile`.`ENTRY_ID`
-                          ORDER BY `members_profile`.`ENTRY_ID` DESC
+                          -- ORDER BY `members_profile`.`ENTRY_ID` DESC
                           LIMIT 0, 50;
                             ";
 
@@ -252,6 +248,15 @@
                                 $Date_of_Membership = $r['Date_of_Membership'];
                                 $isLacking = ($r['Remarks']=='Lacking'?1:0); 
                                 $Remarks = $r['Remarks'];
+                                $form_number = $r['form_number'];
+
+                                
+                                $dl_policy_disabler = "disabled";
+                                $dl_policy_class = "btn-default";
+                                if ($form_number>0) {
+                                    $dl_policy_disabler = "";
+                                    $dl_policy_class = "btn-info";
+                                }
 
                                 $row_colorclass = "";                                
                                 if ($Account_Status == "Overdue"){
@@ -261,9 +266,6 @@
                                 }else {
                                     $row_colorclass = "";
                                 }
-
-
-
 
                                 $payment_button_htm = "";
                                 if ($isLacking == 1){
@@ -291,14 +293,25 @@
                                             $payment_button_htm
                                             
                                             <a href=\"#\" 
-                                            link=\"fpdf/reports/r_policy.php?Member_Code=$Member_Code#view=FitH\" 
+                                            link=\"https://docs.google.com/gview?url=http://is.dmcpi.com/pages/tbs/rendered/$Member_Code"."_policy.docx&embedded=true\" 
+                                            member_code=$Member_Code
                                             target=_blank 
                                             title=\"View policy\"
                                             id=btn_policy_preview
                                             data-toggle=\"modal\" 
                                             data-target=\".preview_modal\"                                           
-                                            class=\"btn btn-info btn-circle  btn-xs\"
-                                            ><i class=\"glyphicon glyphicon-list-alt\"></i></a>
+                                            class=\"btn $dl_policy_class btn-circle  btn-xs $dl_policy_disabler\"
+                                            ><i class=\"glyphicon glyphicon-eye-open\"></i></a>
+
+                                            <a href=\"#\" 
+                                            link=\"./tbs/dl_policy.php?member_code=$Member_Code\" 
+                                            target=_blank 
+                                            $dl_policy_disabler
+                                            title=\"Download policy\"
+                                            id=btn_policy_download
+                                            data-toggle=\"tooltip\" data-placement=\"left\"
+                                            class=\"btn $dl_policy_class btn-circle  btn-xs $dl_policy_disabler\"
+                                            ><i class=\"glyphicon glyphicon-download-alt\"></i></a>
 
                                             <a href=\"?page=cliregistrationform&Member_Code=$Member_Code\" 
                                             data-toggle=\"tooltip\" data-placement=\"left\" title=\"Edit beneficiary's Basic Information\"         
@@ -469,8 +482,6 @@
                 </div>
               </div>
 
-
-
               <!-- Text input-->
               <div class="form-group">
                 <label class="col-md-4 control-label" for="no_of_units">NO. OF UNITS</label>  
@@ -479,11 +490,6 @@
                   
                 </div>
               </div>
-
-
-
-
-
 
               <!-- Select Basic -->
               <div class="form-group">
@@ -536,80 +542,6 @@
           </div> <!-- account_info_container -->
 
 
-          <!-- div class="payment_info_container">
-              <legend>DETAIL OF PREVIOUS PERIOD PAYMENT</legend>
-
-              <div class="form-group">
-                <label class="col-md-4 control-label" for="dtReceiptDate">RECEIPT DATE</label>  
-                <div class="col-md-4">
-                <input id="dtReceiptDate" name="dtReceiptDate" type="date" placeholder="" class="form-control input-md" required>
-                <span class="help-block">Date of payment</span>  
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="col-md-4 control-label" for="txtORPR">OR/PR #</label>  
-                <div class="col-md-4">
-                <input id="txtORPR" name="txtORPR" type="number" placeholder="" class="form-control input-md" required>
-                  
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="col-md-4 control-label" for="selPeriod">PERIOD</label>
-                <div class="col-md-4">
-                  <select id="selPeriod" name="selPeriod" class="form-control">
-                    <option value="1" selected>January</option>
-                    <option value="2">February</option>
-                    <option value="3">March</option>
-                    <option value="4">April</option>
-                    <option value="5">May</option>
-                    <option value="6">June</option>
-                    <option value="7">July</option>
-                    <option value="8">August</option>
-                    <option value="9">September</option>
-                    <option value="10">October</option>
-                    <option value="11">November</option>
-                    <option value="12">December</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="col-md-4 control-label" for="selYear">YEAR</label>
-                <div class="col-md-4">
-                  <select id="selYear" name="selYear" class="form-control">
-                    <?php
-                        $current_year = date("Y");
-                      for ($i=2013;$i<=$current_year+1;$i++) {
-                        if ($current_year==$i) {
-                          echo "<option value=$i selected>$i</option>";
-                        }else{
-                          echo "<option value=$i>$i</option>";
-                        }
-                      }
-                    ?>
-                  </select>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="col-md-4 control-label" for="txtNoPeriodPaid">NO. PERIOD PAID</label>  
-                <div class="col-md-4">
-                <input id="txtNoPeriodPaid" name="txtNoPeriodPaid" type="number" placeholder="" class="form-control input-md" required>
-                <span class="help-block">Total Number of Month Paid</span>  
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="col-md-4 control-label" for="txtAmountPaid" >AMOUNT</label>  
-                <div class="col-md-4">
-                <input id="txtAmountPaid" name="txtAmountPaid" type="number" placeholder="" class="form-control input-md" disabled>
-                <span class="help-block">The total amount indicated in the receipt</span>  
-                </div>
-              </div>
-
-            </div> <**payment_info_container -->
           <!-- Button -->
           <div class="form-group">
             <label class="col-md-4 control-label" for="btnUpdate"></label>
@@ -733,28 +665,15 @@
                 selBranch:selBranch,
                 no_of_units: no_of_units,
 
-//                dtReceiptDate:dtReceiptDate,
-//                txtORPR:txtORPR,
-//                selPeriod:selPeriod,
-//                selYear:selYear,
-//                txtNoPeriodPaid:txtNoPeriodPaid,
-//                txtAmountPaid:txtAmountPaid  
-
             },
             success: function(response) {
                   //alert(response);
-                 console.log('res: '+response);
+                 //console.log('res: '+response);
                  if (response.indexOf("**success**") > -1){
 
                     var strarray=response.split('|');
 
-/*
-                      $('#txtfirstname').val(strarray[1]);
-                      $('#txtmiddlename').val(strarray[2]);
-                      $('#txtlastname').val(strarray[3]);
-                      $('#selSex').val(strarray[4]);
-                      $('#dtDOB').val(strarray[5]);
-*/
+
                     alert('Update Success!');
                     window.location = path;
 
@@ -790,13 +709,6 @@
         $('#no_of_units').val('1');
         $('#path').val($(this).attr('path'));
 
-//        $('#dtReceiptDate').val('');
-//        $('#txtORPR').val('');
-//        $('#selPeriod').val('');
-//        $('#selYear').val(2018);
-//        $('#txtNoPeriodPaid').val(1);
-//        $('#txtAmountPaid').val('');
-
         $('#Member_Code').val('');
         $('#Member_Code_hidden').val('');
 
@@ -808,7 +720,7 @@
             },
             success: function(response) {
                 
-                 console.log('res: '+response);
+                 //console.log('res: '+response);
                  if (response.indexOf("**success**") > -1){
                     /*    0 - result status
                           
@@ -843,14 +755,6 @@
 
                       $('#no_of_units').val(strarray[10]);
 
-                      /*
-                      $('#dtReceiptDate').val(strarray[10]);
-                      $('#txtORPR').val(strarray[11]);
-                      $('#selPeriod').val(strarray[12]);
-                      $('#selYear').val(strarray[13]);
-                      $('#txtNoPeriodPaid').val(strarray[14]);
-                      $('#txtAmountPaid').val(strarray[15]);
-                      */
                 }else if (response.indexOf("**failed**") > -1){
                     alert('No record found');
 
@@ -864,49 +768,35 @@
         e.preventDefault();
         var iframe = $('#prev_pdf');
         var link = $(this).attr('link');
-        
-        $(iframe).attr('src', link);      
+        var member_code = $(this).attr('member_code');
+        //Generate Policy
+       
+        $.ajax({  
+          type: 'GET',
+          url: './tbs/v_policy.php', 
+          data: { 
+              member_code:member_code,
+          },
+          success: function(response) {
+              if (response.indexOf("**success**") > -1){
+                  $(iframe).attr('src', link);      
+              }else if (response.indexOf("**not_found**") > -1){
+                   alert('Unable to display policy! Policy template not found.');
+              }
+          }
+        });  
+
 
     });
 
+    $(document).on('click','#btn_policy_download',function(e){
+      e.preventDefault();
+         if (confirm("You are about to download this policy. Do you want to continue?")){
+            var link = $(this).attr('link');
+            window.location = link; 
 
-    // $(document).on("click","#btnclientlistsearch",function(){
-    //     var search_criteria = $('#search_criteria').val();
-    //     var search_plan= $('select[id="search_plan"]').val();
-    //     var search_agent= $('select[id="search_agent"]').val();
-    //     alert("Im out");
-
-
-    //     $('#clientlist').html('');  
-    //         $.ajax({  
-    //             type: 'GET',
-    //             url: './proc/clientlistsearch_proc.php', 
-    //             data: { 
-    //                 search_criteria:search_criteria,
-    //                 search_agent:search_agent,
-    //                 search_plan:search_plan
-    //             },
-    //             success: function(response) {
-    //                  //prompt('res: ',response);
-    //                  console.log('res: '+response);
-    //                  //return;
-    //                  if (response.indexOf("**success**") > -1){
-    //                     //    0 - result status
-    //                     //    1 - html table rows for detail section
-    //                     //    2 - row count
-    //                     var strarray=response.split('|');
-                        
-    //                      $('#clientlist').append(strarray[1]).fadeIn('slow');
-    //                      $('#row_count').html( strarray[2] +' record found');
-
-    //                  }else if (response.indexOf("**failed**") > -1){
-    //                     $('#row_count').html('No record found');
-    //                     alert('No record found');
-
-    //                  }
-    //             }
-    //     });
-    // });
+         }
+    });
 
 
     $(document).on('click','#delete_client',function(){
